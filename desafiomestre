@@ -1,0 +1,104 @@
+#include <stdio.h>
+
+// Constantes
+
+#define LINHATABULEIRO 10
+#define COLUNATABULEIRO 10
+#define NAVIO 3
+#define HABILIDADES 1
+
+#define LINHACONE 7
+#define COLUNACONE 5
+
+#define LINHACRUZ 5
+#define COLUNACRUZ 5
+
+#define LINHAOCTAEDRO 5
+#define COLUNAOCTAEDRO 5
+
+int main () {
+    int matrizTabuleiro[LINHATABULEIRO][COLUNATABULEIRO] = {0}; // "{0}" define que todos os números iniciais sejam de 0.
+    int matrizCone[LINHACONE][COLUNACONE] = {0};
+    int matrizCruz[LINHACRUZ][COLUNACRUZ] = {0};
+    int matrizOctaedro[LINHAOCTAEDRO][COLUNAOCTAEDRO] = {0};
+
+// Define as posições dos navíos horizontais.
+
+    for (int i = 0; i < 3; i++) {
+        matrizTabuleiro[i][0] = NAVIO; 
+        for (int j = 6; j < 9; j++) {
+            matrizTabuleiro[4][j] = NAVIO;
+        }
+        printf("\n");
+    }
+
+// Posições dos navíos verticais.
+    
+    matrizTabuleiro[6][3] = NAVIO;
+    matrizTabuleiro[7][2] = NAVIO;
+    matrizTabuleiro[8][1] = NAVIO;
+
+    matrizTabuleiro[0][5] = NAVIO;
+    matrizTabuleiro[1][6] = NAVIO;
+    matrizTabuleiro[2][7] = NAVIO;
+
+// Habilidades
+
+    // Cruz
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (i == 2 || j == 2) {
+                matrizCruz[i][j] = HABILIDADES;
+            }
+        }
+    }
+
+    // Cone
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (i == 0 && j == 2) matrizCone[i][j] = HABILIDADES;
+            else if (i == 1 && j >= 1 && j <= 3) matrizCone[i][j] = HABILIDADES;
+            else if (i == 2 && j >= 0 && j <= 4) matrizCone[i][j] = HABILIDADES;
+        }
+    }
+
+    // Octaedro
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (i == 0 && j == 2) matrizOctaedro[i][j] = HABILIDADES;           // Topo
+            else if (i == 1 && j >= 1 && j <= 3) matrizOctaedro[i][j] = HABILIDADES; // Meio-cima
+            else if (i == 2 && j >= 0 && j <= 4) matrizOctaedro[i][j] = HABILIDADES; // Meio (mais larga)
+            else if (i == 3 && j >= 1 && j <= 3) matrizOctaedro[i][j] = HABILIDADES; // Meio-baixo
+            else if (i == 4 && j == 2) matrizOctaedro[i][j] = HABILIDADES;           // Base
+        }
+    }
+
+// Resultado (Modificar, caso queira que apareça outra habilidade.)
+
+int oCruzL = 7, oCruzC = 7; // Onde o cone vai aparecer no tabuleiro.
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (matrizCruz[i][j] == 1) {
+                // Calcula a posição no tabuleiro (i-2 e j-2 servem para centralizar a matriz 5x5).
+                int tabL = oCruzL + i - 2;
+                int tabC = oCruzC + j - 2;
+
+                if (tabL >= 0 && tabL < 10 && tabC >= 0 && tabC < 10) {
+                    matrizTabuleiro[tabL][tabC] = 5;
+                }
+            }
+        }
+        printf("\n");
+    }
+
+    printf("### TABULEIRO FINAL ###\n");
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            printf("%d ", matrizTabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
