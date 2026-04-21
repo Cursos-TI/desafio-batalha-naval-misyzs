@@ -1,19 +1,25 @@
 #include <stdio.h>
 
+// Constantes
+
 #define LINHA 10
 #define COLUNA 10
 #define NAVIO 3
 
 int main () {
-    int tabuleiro[LINHA][COLUNA] = {0};
+    int tabuleiro[LINHA][COLUNA] = {0}; // "{0}" define que todos os números iniciais sejam de 0.
+
+// Define as posições dos navíos horizontais.
 
     for (int i = 0; i < 3; i++) {
-        tabuleiro[i][0] = NAVIO;
+        tabuleiro[i][0] = NAVIO; 
         for (int j = 6; j < 9; j++) {
             tabuleiro[4][j] = NAVIO;
         }
         printf("\n");
     }
+
+// Define as posições dos navíos verticais.
     
     tabuleiro[6][3] = NAVIO;
     tabuleiro[7][2] = NAVIO;
@@ -22,6 +28,8 @@ int main () {
     tabuleiro[0][5] = NAVIO;
     tabuleiro[1][6] = NAVIO;
     tabuleiro[2][7] = NAVIO;
+
+// Resultado
 
     printf("### TABULEIRO DE BATALHA NAVAL ###\n\n");
     for (int i = 0; i < LINHA; i++) {
