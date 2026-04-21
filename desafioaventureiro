@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+#define LINHA 10
+#define COLUNA 10
+#define NAVIO 3
+
+int main () {
+    int tabuleiro[LINHA][COLUNA] = {0};
+
+    for (int i = 0; i < 3; i++) {
+        tabuleiro[i][0] = NAVIO;
+        for (int j = 6; j < 9; j++) {
+            tabuleiro[4][j] = NAVIO;
+        }
+        printf("\n");
+    }
+    
+    tabuleiro[6][3] = NAVIO;
+    tabuleiro[7][2] = NAVIO;
+    tabuleiro[8][1] = NAVIO;
+
+    tabuleiro[0][5] = NAVIO;
+    tabuleiro[1][6] = NAVIO;
+    tabuleiro[2][7] = NAVIO;
+
+    printf("### TABULEIRO DE BATALHA NAVAL ###\n\n");
+    for (int i = 0; i < LINHA; i++) {
+        for (int j = 0; j < COLUNA; j++) {
+            printf("%d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
